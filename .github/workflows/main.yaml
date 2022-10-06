@@ -1,7 +1,4 @@
-on: 
-  push:
-    branches:
-        -main
+on: [push]
 name: Build project and run Lighthouse CI
 jobs:
   lhci:
