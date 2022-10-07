@@ -1,12 +1,12 @@
 name: CI
 on: [push]
-options: --user root
 jobs:
   lighthouseci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
+      - run: chown -R 1001:1001 /github/home/.cache && echo "pwn dat cache"
         with:
           node-version: 16
       - name: npm install, build
