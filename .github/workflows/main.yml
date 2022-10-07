@@ -1,5 +1,6 @@
 name: CI
 on: [push]
+options: --user root
 jobs:
   lighthouseci:
     runs-on: ubuntu-latest
