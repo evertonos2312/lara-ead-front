@@ -6,15 +6,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
-      - run: chown -R 1001:1001 /github/home/.cache && echo "pwn dat cache"
         with:
           node-version: 16
       - name: npm install, build
         run: |
-          npm install
+          sudo npm install
           sudo npm run build
       - name: run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.8.x
+         sudo npm install -g @lhci/cli@0.8.x
           lhci autorun
      
