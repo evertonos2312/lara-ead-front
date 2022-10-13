@@ -1,8 +1,13 @@
 module.exports = {
     ci: {
       collect: {
-        startServerCommand: 'ng serve',
-        url: ['http://localhost:4200']
+        numberOfRuns: 3,
+        staticDistDir: "dist/lara-ead-front",
+      },
+      assert: {
+        assertions: {
+          "first-conteful-paint": ["warn", { maxNumericValue: 4000}],
+        }
       },
       upload: {
         target: 'temporary-public-storage',
