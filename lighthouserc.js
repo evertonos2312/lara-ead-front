@@ -6,7 +6,9 @@ module.exports = {
       },
       assert: {
         assertions: {
-          "first-conteful-paint": ["warn", { maxNumericValue: 4000}],
+          "first-contenful-paint": ["warn", { maxNumericValue: 4000}],
+          "categories:performance": ['warn', {minScore: 1}],
+          "categories:accessibility": ['error', {minScore: 1}]
         }
       },
       upload: {
