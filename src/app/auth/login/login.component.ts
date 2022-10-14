@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
   login: Login = new Login();
   loading: boolean = false;
   message!: string;
-  
+
   constructor(
     private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute
-  ) { 
+  ) {
     if (this.loginService.usuarioLogado) {
       this.router.navigate( ["/home"]);
     }
@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
   logar(): void {
     this.loading = true;
     if (this.formLogin.form.valid) {
-      this.loginService.login(this.login).subscribe((usu) => {
+      this.loginService.login(this.login)
+        .subscribe((usu) => {
         if (usu != null){
           this.loginService.usuarioLogado = usu;
           this.loading = false;
@@ -44,8 +45,17 @@ export class LoginComponent implements OnInit {
           this.loading = false;
           this.message = "Credenciais inválidas.";
         }
-      })
+      },
+          () => {
+          this.loading = false;
+          this.message = "Credenciais inválidas.";
+          }
+      )
     }
+  }
+
+  logout(): void {
+
   }
 
 }

@@ -1,37 +1,59 @@
-<h1>Login Teste 2</h1>
-<div *ngIf="message" class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{message}}
-    <a href="#" class="close" data-dismiss="alert"> &times;</a>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="$event.preventDefault()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<section class="">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="assets/img/draw2.webp"
+             class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <div *ngIf="message" class="alert alert-danger alert-dismissible fade show" role="alert">
+           <strong>Erro: </strong>{{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="$event.preventDefault()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #formLogin="ngForm">
+          <div class="form-outline mb-4">
+            <label class="form-label" for="email">E-mail:</label>
+            <input type="email" id="email" name="email" class="form-control form-control-lg"
+                   placeholder="Digite seu e-mail" required [(ngModel)]="login.email" #email="ngModel" />
+            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger mt-2">
+              <div [hidden]="!email.errors['required']">
+                Digite o e-mail.
+              </div>
+            </div>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="password">Senha:</label>
+            <input type="password" id="password" required name="password" class="form-control form-control-lg"
+                   placeholder="Sua senha" [(ngModel)]="login.password" #password="ngModel" />
+            <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger mt-2">
+              <div [hidden]="!password.errors['required']">
+                Digite a senha.
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input class="form-check-input me-2" [(ngModel)]="login.remember" #remember="ngModel" name="remember" type="checkbox" value="" id="remember" />
+              <label class="form-check-label" for="remember">
+                Lembrar de mim
+              </label>
+            </div>
+            <a class="text-body">Esqueceu sua senha?</a>
+          </div>
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="button" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="logar()" [disabled]="!formLogin.form.valid">Acessar
+            </button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Não tem uma conta?
+              <a [routerLink]="['/cadastro']" class="link-danger">Registrar</a>
+            </p>
+          </div>
 
-<div class="well">
-    <form #formLogin="ngForm">
-        <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="login.email" #email="ngModel" required="true">
-            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
-                <div [hidden]="!email.errors['required']">
-                    Digite o e-mail.
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password">Senha:</label>
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="login.password" #password="ngModel" required="true">
-            <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
-                <div [hidden]="!password.errors['required']">
-                    Digite a senha.
-                </div>
-            </div>
-        </div>
-        <button type="button" class="btn btn-primnary" (click)="logar()" [disabled]="!formLogin.form.valid">
-            <i class="fa fa-save" aria-hidden="true"></i>Logar
-        </button>
-    </form>
-    <a class="btn btn-secondary" [routerLink]="['/cadastro']">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>Registrar
-    </a>
-</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
