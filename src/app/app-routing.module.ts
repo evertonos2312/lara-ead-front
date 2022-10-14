@@ -13,16 +13,13 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: 'ADMIN,USUARIO'
-    },
+    canActivate: [AuthGuard]
   },
   ...LoginRoutes
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

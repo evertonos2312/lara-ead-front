@@ -11,7 +11,7 @@ const LS_CHAVE: string = "usuarioLogado";
 })
 
 export class LoginService {
-  BASE_URL = "https://consumo-familiar.tech/api/"
+  BASE_URL = "https://consumo-familiar-api.tech/api/"
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -34,14 +34,15 @@ export class LoginService {
     let dados = {
       'email': login.email,
       'password': login.password,
+      'remember' : login.remember,
       'device_name': 'angular'
     };
-    console.log(login);
     return this.httpClient.post<Usuario>(this.BASE_URL+'auth', dados, this.httpOptions);
 
   }
 
   logout() {
+
     delete localStorage[LS_CHAVE];
   }
 }
