@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
   ) {
     if (this.loginService.usuarioLogado) {
       this.router.navigate( ["/home"]);
+    } else {
+      this.router.navigate( ["/login"]);
     }
   }
 
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.login)
         .subscribe((usu) => {
         if (usu != null){
-          this.loginService.usuarioLogado = usu;
+          this.loginService.usuarioLogado = usu.token;
           this.loading = false;
           this.router.navigate( ["/home"]);
         } else {
@@ -54,8 +56,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  logout(): void {
 
-  }
 
 }

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <nav *ngIf="usuarioLogado" class="navbar navbar-expand-md n navbar-dark bg-dark">
+    <a href="#" class="navbar-brand nav-link">
+      <i class="fa fa-user-edit"></i>
+    </a>
+    <div class="navbar-collapse collapsed" id="navbarContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link">Item 1</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Item 2</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Item 3</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Item 4</a>
+        </li>
+        <li class="nav-item d-flex ml-auto" ngbDropdown>
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button">Perfil</a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+            <a href="#" ngbDropdownItem (click)="$event.preventDefault()">Editar</a>
+            <a ngbDropdownItem (click)="logout()">Sair</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

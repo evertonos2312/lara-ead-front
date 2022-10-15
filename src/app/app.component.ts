@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {LoginService} from "./auth/services/login.service";
 import {Usuario} from "./shared/models";
+// @ts-ignore
+import $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +16,25 @@ export class AppComponent {
   constructor(
     private router: Router,
     private loginService: LoginService
-  ) {  }
+  ) { this.hideFooter() }
 
-  get usuarioLogado(): Usuario | null {
+  get usuarioLogado(): string | undefined {
     return this.loginService.usuarioLogado;
   }
 
-  logout() {
-    this.loginService.logout();
-    this.router.navigate(['/login']);
+
+
+  hideFooter() {
+    //hide footer when input box is on focus
+    $(document).on('focus', 'input, textarea', function() {
+      $("#footer").hide();
+    });
+
+//show footer when input is NOT on focus
+    $(document).on('blur', 'input, textarea', function() {
+      $("#footer").show();
+    });
   }
+
+
 }

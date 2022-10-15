@@ -15,19 +15,20 @@ export class LoginService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'my-auth-token'
     })
   }
 
   constructor(private httpClient: HttpClient) { }
 
-  public get usuarioLogado(): Usuario {
+  public get usuarioLogado(): string | undefined {
     let usu = localStorage[LS_CHAVE];
-    return (usu ? JSON.parse(localStorage[LS_CHAVE]) : null);
+    return (usu ? usu : null);
   }
 
-  public set usuarioLogado(usuario: Usuario) {
-    localStorage[LS_CHAVE] = JSON.stringify(usuario);
+  public set usuarioLogado(usuario: string | undefined) {
+    localStorage[LS_CHAVE] = usuario;
   }
 
   login (login: Login): Observable<Usuario | null> {
@@ -41,8 +42,13 @@ export class LoginService {
 
   }
 
-  logout() {
-
+  logout(): Observable<Usuario | null> {
+    let usu = this.usuarioLogado;
+    if(usu != null){
+      this.httpOptions.headers =
+        this.httpOptions.headers.set('Authorization', "Bearer " +usu);
+    }
     delete localStorage[LS_CHAVE];
+    return this.httpClient.post<Usuario>(this.BASE_URL+'logout','', this.httpOptions);
   }
 }
