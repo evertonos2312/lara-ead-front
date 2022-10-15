@@ -22,11 +22,7 @@ export class AuthGuard implements CanActivate {
     const usuarioLogado = this.loginService.usuarioLogado;
     let url = state.url;
     if (usuarioLogado) {
-      if (route.data?.['role'] && route.data?.['role'].indexOf(usuarioLogado.perfil) === -1){
-        this.router.navigate(['/login'], {
-          queryParams: { error: "Proibido o acesso a " + url}
-        });
-      }
+
       return true;
     }
     this.router.navigate(['login'], {
@@ -34,5 +30,5 @@ export class AuthGuard implements CanActivate {
     });
     return false;
   }
-  
+
 }
