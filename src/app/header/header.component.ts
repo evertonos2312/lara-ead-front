@@ -24,8 +24,10 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.loginService.logout().subscribe(() => {
+      this.loginService.deleteUsuariologado();
       this.router.navigate( ["/login"]);
     }, (error) => {
+      console.log(error)
     })
   }
 
