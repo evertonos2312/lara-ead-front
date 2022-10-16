@@ -15,12 +15,21 @@ export class LoginComponent implements OnInit {
   login: Login = new Login();
   loading: boolean = false;
   message!: string;
+  success!: string;
 
   constructor(
     private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute
   ) {
+    const navigation = this.router.getCurrentNavigation();
+    if(navigation != null){
+      if(navigation.extras.state != null){
+        const state = navigation.extras.state as {data: string};
+        this.success = state.data;
+      }
+    }
+
     if (this.loginService.usuarioLogado) {
       this.router.navigate( ["/home"]);
     } else {
